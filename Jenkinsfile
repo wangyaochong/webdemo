@@ -12,7 +12,7 @@ pipeline {
         }
         stage('build project') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean package dockerfile:build'
             }
         }
         stage('publish project') {
