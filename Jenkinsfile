@@ -17,21 +17,24 @@ pipeline {
                 echo 'publish project'
             }
         }
-        stage('code check'){
-            script{
-                sonarHome= tool 'sonar-scanner'  //获取sonar-scanner工具
-            }
-            withSonarQubeEnv('sonar'){
-                sh "${sonarHome}/bin/sonar-scanner"
+        stage('code check') {
+            steps {
+                script {
+                    sonarHome = tool 'sonar-scanner'  //获取sonar-scanner工具
+                }
+                withSonarQubeEnv('sonar') {
+                    sh "${sonarHome}/bin/sonar-scanner"
+                }
             }
         }
 
     }
+
     post {
         always {
-            emailext( subject: '构建通知：${PROJECT_NAME} - Build # ${BUILD_NUMBER} -${BUILD_STATUS}!',
-            mimeType: 'text/html',
-                body: '''${FILE,path="email.html"}''', to: '1162025261@qq.com'
+            emailext(subject: '构建通知：${PROJECT_NAME} - Build # ${BUILD_NUMBER} -${BUILD_STATUS}!',
+                    mimeType: 'text/html',
+                    body: '''${FILE,path="email.html"}''', to: '1162025261@qq.com'
             )
         }
     }
