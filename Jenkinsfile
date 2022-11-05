@@ -17,6 +17,14 @@ pipeline {
                 echo 'publish project'
             }
         }
+        stage('code check'){
+            script{
+                sonarHome= tool 'sonar-scanner'  //获取sonar-scanner工具
+            }
+            withSonarQubeEnv('sonar'){
+                sh "${sonarHome}/bin/sonar-scanner"
+            }
+        }
 
     }
     post {
