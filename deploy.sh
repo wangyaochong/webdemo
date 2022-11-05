@@ -34,7 +34,7 @@ if [ "$imageId" !=  "" ] ; then
 fi
 
 # 登录Harbor
-docker login -u harbor -p Harbor12345 $harbor_url
+docker login -u admin -p Harbor12345 $harbor_url
 
 # 下载镜像
 docker pull $imageName
