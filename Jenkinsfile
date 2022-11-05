@@ -22,7 +22,9 @@ pipeline {
         stage('publish project') {
             steps {
                 echo 'publish project'
-                sshPublisher(publishers: [sshPublisherDesc(configName: "192.168.175.130", transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/home/deploy/deploy.sh $harbor_url $harbor_project $currentProjectName $tag $currentProjectPort", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+                sh "chmod +x deploy.sh"
+                sh "scp deploy.sh 192.168.175.130:/tmp/"
+                sshPublisher(publishers: [sshPublisherDesc(configName: "192.168.175.130", transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/tmp/deploy.sh $harbor_url $harbor_project $currentProjectName $tag $currentProjectPort", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
             }
         }
 //        stage('code check') {
