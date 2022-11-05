@@ -1,5 +1,9 @@
 def git_url = "git@192.168.175.134:it_group/web_demo.git"
-
+def harbor_url = "192.168.175.134:85"
+def harbor_project="library"
+def currentProjectName ="webdemo"
+def tag = "1.0-SNAPSHOT"
+def currentProjectPort=9999
 
 pipeline {
     agent any
@@ -18,6 +22,7 @@ pipeline {
         stage('publish project') {
             steps {
                 echo 'publish project'
+                sshPublisher(publishers: [sshPublisherDesc(configName: "publish_config", transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "deploy.sh $harbor_url $harbor_project $currentProjectName $tag $currentProjectPort", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
 //        stage('code check') {
