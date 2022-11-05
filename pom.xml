@@ -57,7 +57,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>192.168.175.134:85/library</repository>
+                    <dockerfile>Dockerfile</dockerfile>
+                    <repository>192.168.175.134:85/library/${project.name}</repository>
                     <tag>${project.version}</tag>
 <!--                    <buildArgs>-->
 <!--                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>-->
