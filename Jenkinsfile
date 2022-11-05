@@ -1,10 +1,13 @@
+def git_url = "git@192.168.175.134:it_group/web_demo.git"
+
+
 pipeline {
     agent any
 
     stages {
         stage('pull code') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], extensions: [], userRemoteConfigs: [[credentialsId: 'ssh-auth', url: 'git@192.168.175.134:it_group/web_demo.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], extensions: [], userRemoteConfigs: [[credentialsId: 'ssh-auth', url: "${git_url}"]]])
             }
         }
         stage('build project') {
