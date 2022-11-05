@@ -44,27 +44,28 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.13</version>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <dockerfile>Dockerfile</dockerfile>
-                    <repository>192.168.175.134:85/library/${project.name}</repository>
-                    <tag>${project.version}</tag>
-<!--                    <buildArgs>-->
-<!--                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>-->
-<!--                    </buildArgs>-->
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.spotify</groupId>-->
+<!--                <artifactId>dockerfile-maven-plugin</artifactId>-->
+<!--                <version>1.4.13</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>default</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>build</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <dockerfile>Dockerfile</dockerfile>-->
+<!--                    <repository>192.168.175.134:85/library/${project.name}</repository>-->
+<!--                    <tag>${project.version}</tag>-->
+<!--&lt;!&ndash;                    <buildArgs>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </buildArgs>&ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -74,10 +75,10 @@
                         <phase>package</phase>
                         <goals>
                             <goal>repackage</goal>
+                            <goal>build-image</goal>
                         </goals>
                     </execution>
                 </executions>
-
                 <configuration>
                     <includeSystemScope>true</includeSystemScope>
                     <mainClass>org.example.App</mainClass>
